@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Enable CORS for multiple domains
 const allowedOrigins = [
-  "http://localhost:3000",
+  "http://localhost:5173",
   "https://krid-af-lys.vercel.app",
 
 ];
