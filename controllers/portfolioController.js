@@ -117,14 +117,22 @@ export const deletePortfolio = async (req, res) => {
     }
 
     // Delete thumbnail from Cloudinary
-    await cloudinary.v2.uploader.destroy(portfolio.thumbnail.public_id);
-
-    // Delete all portfolio images from Cloudinary
-    for (const img of portfolio.images) {
-      await cloudinary.v2.uploader.destroy(img.public_id);
+    if (portfolio.thumbnail?.public_id) {
+      await cloudinary.v2.uploader.destroy(portfolio.thumbnail.public_id);
     }
 
-    await portfolio.remove();
+    // Delete all portfolio images from Cloudinary
+    if (portfolio.images?.length) {
+      for (const img of portfolio.images) {
+        if (img.public_id) {
+          await cloudinary.v2.uploader.destroy(img.public_id);
+        }
+      }
+    }
+
+    // ✅ Correct method for deleting the document
+    await Portfolio.findByIdAndDelete(req.params.id);
+
     res.status(200).json({ message: "Portfolio deleted successfully." });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
