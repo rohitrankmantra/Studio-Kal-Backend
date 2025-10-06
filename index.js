@@ -12,9 +12,9 @@ const app = express();
 app.use(express.json());
 // Enable CORS for multiple domains
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://krid-af-lys.vercel.app",
-  "https://studiokal.netlify.app"
+  "https://studiokal.netlify.app",
+  "https://kridaflys.com",
 ];
 app.use(
   cors({
