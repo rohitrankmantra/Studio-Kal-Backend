@@ -5,22 +5,17 @@ import connectDB from "./config/db.js";
 import heroRoutes from "./routes/heroRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 
-
 dotenv.config();
 
 const app = express();
-
 // JSON parsing
 app.use(express.json());
-
 // Enable CORS for multiple domains
 const allowedOrigins = [
   "http://localhost:5173",
   "https://krid-af-lys.vercel.app",
   "https://studiokal.netlify.app"
-
 ];
-
 app.use(
   cors({
     origin: function (origin, callback) {
